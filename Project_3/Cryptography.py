@@ -116,7 +116,38 @@ class Mult_Cipher(Cipher):
         return self.decoded_text
 
     def generate_keys(self):
-        a = 0
+        None
+
+#----------Affine_cipher_subclass----------
+
+class Affine_cipher(Cipher):
+    def __init__(self, key):
+        super().__init__()
+        self.key = key      # key er tupple (n1, n2)
+
+    def encode(self, text):
+        mult_cipher = Mult_Cipher(self.key[0])
+        mult_encoded = mult_cipher.encode(text)
+
+        caesar = Caesar(self.key[1])
+        return caesar.encode(mult_encoded)
+
+    def decode(self, text):
+        caesar = Caesar(self.key[1])
+        caesar_text = caesar.decode(text)
+
+        mult_cipher = Mult_Cipher(self.key[0])
+        return mult_cipher.decode(caesar_text)
+
+
+    def generate_keys(self):
+        None
+
+
+#-------------Unbreakable subclass Cipher -----
+
+class Unbreakable(Cipher):
+    
 
 #-------------Person--------------
 class Person:
@@ -182,6 +213,11 @@ def  main():
     print(mult.encode("KODE"))
     print(mult.decode("EQJM"))
     print(mult.verify("EQJM", mult.encode("EQJM")))
+
+
+    aff = Affine_cipher((3,2))
+    print(aff.encode("ABC"))
+    print(aff.decode("CFI"))
 
 main()
 
