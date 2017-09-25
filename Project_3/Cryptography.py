@@ -147,7 +147,31 @@ class Affine_cipher(Cipher):
 #-------------Unbreakable subclass Cipher -----
 
 class Unbreakable(Cipher):
-    None 
+    def __init__(self, keyword):
+        super().__init__()
+        self.keyword = keyword
+        self.keyword_index_counter = 0
+
+    def encode(self, text):
+        self.encoded_text = ""
+
+        for symbol in text:
+            symbol_index_in_alphabet = self.legal_alphabet.index(symbol)
+            keyword_index_in_alphabet = self.legal_alphabet.index(self.keyword[self.keyword_index_counter%len(self.keyword)])
+
+            code_key = symbol_index_in_alphabet + keyword_index_in_alphabet
+
+            self.encoded_text += self.legal_alphabet[code_key%self.alphabet_size]
+            self.keyword_index_counter += 1
+
+        return self.encoded_text
+
+    def decode(self, text):
+        self.decoded_text = ""
+
+        
+
+
 
 #-------------Person--------------
 class Person:
@@ -218,6 +242,9 @@ def  main():
     aff = Affine_cipher((3,2))
     print(aff.encode("ABC"))
     print(aff.decode("CFI"))
+
+    x = Unbreakable("PIZZA")
+    print(x.encode("HEMMELIGHET"))
 
 main()
 
