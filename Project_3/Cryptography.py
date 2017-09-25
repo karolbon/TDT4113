@@ -2,7 +2,7 @@
 class Cipher:
     def __init__(self):
         self.alphabet_size = 95
-        self.legal_alphabet = []
+        self.legal_alphabet = " !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
 
     def encode(self, text):       #KODE
         return None            # Initialiseres i subklasser
@@ -38,8 +38,8 @@ class Person:
 #----------Subclass SENDER----------
 
 class Sender(Person):
-    def __init__(self):
-        super().__init__(self)
+    def __init__(self, key):
+        super().__init__(self, key)
 
     def operate_cipher(self):
         a = 0
@@ -49,8 +49,8 @@ class Sender(Person):
 
 class Receiver(Person):
 
-    def __init__(self):
-        super().__init__(self)
+    def __init__(self, key):
+        super().__init__(self, key)
 
     def operate_cipher(self):
         a = 0
