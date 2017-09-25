@@ -147,7 +147,7 @@ class Affine_cipher(Cipher):
 #-------------Unbreakable subclass Cipher -----
 
 class Unbreakable(Cipher):
-    
+    None 
 
 #-------------Person--------------
 class Person:
